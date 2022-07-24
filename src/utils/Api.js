@@ -15,7 +15,7 @@
         })
     }
 
-    editProfile(data){
+   /* editProfile(data){
         return this._fetch(`${this._baseUrl}/users/me`, {
             method: "PATCH",
             headers: this._headers,
@@ -34,14 +34,14 @@
                 avatar: data.avatar
             })
         });
-    }
+    } */
     
     getInitialCards(){
         return this._fetch(`${this._baseUrl}/cards`, {
             headers: this._headers
         })
     }
-    createCard(data){
+   /* createCard(data){
         return this._fetch(`${this._baseUrl}/cards`, {
             method: "POST",
             headers: this._headers,
@@ -71,6 +71,6 @@
             headers: this._headers,
           });
 
-    }
+    }*/
     
   }

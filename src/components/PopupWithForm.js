@@ -22,6 +22,7 @@ return(
           </form>
         </div>
       </div>
-    </section>);
+    </section>
+    );
 }
 
