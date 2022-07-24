@@ -14,10 +14,6 @@ return(
           <form className="form popup__form" id={`${props.name}Form`} noValidate>
             {props.children}
             <fieldset className="form__fieldset">
-               {/*<input className="form__input" type="url" id="${props.name}Input" placeholder="Image Link" required />
-              <span className="form__input-error ${props.name}Input-error" />
-            </fieldset>
-<fieldset className="form__fieldset"> */}
               <button 
               className="form__button form__button_inactive"
                type="submit" 
