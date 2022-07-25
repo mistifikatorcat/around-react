@@ -1,5 +1,6 @@
 import React from "react";
 import { Api } from "../utils/Api.js";
+import Card from "./Card.js";
 
 //initializing api
 
@@ -15,18 +16,22 @@ function Main(props){
   const [userName, setUserName] = React.useState("");
   const [userDescription, setUserDescription] = React.useState("");
   const [userAvatar, setUserAvatar] = React.useState("");
+  const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => 
-  {Promise.all([api.getUserInfo(), api.getInitialCards()])
-  .then(([data, /*items*/]) => {
+  { api.getUserInfo()
+  .then((data) => {
     setUserName(data.name);
     setUserDescription(data.about);
     setUserAvatar(data.avatar)
-    
-
-    //cardList.renderItems(items);
   })
-  .catch((err) => {console.log(err)});},[]);
+  .catch((err) => {console.log(err)});
+
+  api.getInitialCards()
+  .then((items) => { 
+    setCards(items);
+  })
+  .catch((err) => {console.log(err)});}, []);
 
 
     return(
@@ -52,15 +57,15 @@ function Main(props){
       {props.children}
       <section className="grid">
         <ul className="grid__cards">
+          {cards.map((card) => {
+            <Card
+            key={card._id}
+            card={card}
+            onCardClick={props.onCardClick}
+            onDeleteClick={props.onDeleteClick}
+            />
+          })}
         </ul>
-      </section>
-      <section className="image popup" id="image">
-        <div className="image__wrapper">
-          <button className="popup__close image__close">
-          </button>
-          <img className="image__file" src="#" alt="" />
-          <p className="image__title" />
-        </div>
       </section>
     </main>
     )
