@@ -1,6 +1,6 @@
 import React from "react";
-import { Api } from "../utils/Api.js";
-import Card from "./Card.js";
+import { Api } from "../utils/Api";
+import Card from "./Card";
 
 //initializing api
 
@@ -25,7 +25,7 @@ function Main(props){
     setUserDescription(data.about);
     setUserAvatar(data.avatar)
   })
-  .catch((err) => {console.log(err)});
+  .catch((err) => {console.log(err);});
 
   api.getInitialCards()
   .then((items) => { 
@@ -57,18 +57,17 @@ function Main(props){
       {props.children}
       <section className="grid">
         <ul className="grid__cards">
-          {cards.map((card) => {
+          {cards.map((card) => (
             <Card
             key={card._id}
             card={card}
             onCardClick={props.onCardClick}
-            onDeleteClick={props.onDeleteClick}
             />
-          })}
+          ))}
         </ul>
       </section>
     </main>
-    )
+    );
 }
 
 export default Main;

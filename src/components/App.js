@@ -1,9 +1,10 @@
 
 import React from 'react';
 import '../index.css';
-import Header from './header';
-import Main from './main';
-import Footer from './footer';
+import Header from './Header';
+import Main from './Main';
+
+import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 
@@ -11,8 +12,8 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-  const [isDeletePopupOpen, setIsDeletePopupOpen] = React.useState(false);
-  const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
+  //const [isDeletePopupOpen, setIsDeletePopupOpen] = React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState({visibility: false});
 
   function handleEditAvatarClick(){
     setIsEditAvatarPopupOpen(true);
@@ -26,20 +27,25 @@ function App() {
     setIsAddPlacePopupOpen(true);
   }
 
-  function handleImageClick(){
-    setIsImagePopupOpen(true);
+  function handleImageClick(card){
+    setSelectedCard({
+      ...selectedCard,
+      visibility: true,
+      name: card.name, 
+      link: card.link});
   }
   
-  function handleImageDelete(){
+  /*function handleImageDelete(){
     setIsDeletePopupOpen(true);
     
-  }
+  }*/
 
   function closeAllPopups(){
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
-    setIsDeletePopupOpen(false);
+    setSelectedCard({visibility: false});
+    //setIsDeletePopupOpen(false);
   }
   return(
   <div>
@@ -49,7 +55,7 @@ function App() {
     onEditProfileClick={handleEditProfileClick}
     onAddPlaceClick={handleAddPlaceClick}
     onCardClick={handleImageClick}
-    onDeleteClick={handleImageDelete}>
+    >
       <PopupWithForm
       name="avatar"
       title="Change Avatar"
@@ -85,7 +91,7 @@ function App() {
           <span className="form__input-error link-error"></span>
         </fieldset>
       </PopupWithForm>
-      <PopupWithForm
+     {/* <PopupWithForm
       name="delete"
       title="Are you sure?"
       isOpen={isDeletePopupOpen}
@@ -93,11 +99,10 @@ function App() {
         <fieldset className="form__fieldset">
           <button className="form__button" type="submit" id="submitButton">Yes</button>
         </fieldset>
-      </PopupWithForm>
-      <ImagePopup card={isImagePopupOpen} onClose={closeAllPopups}/>
+  </PopupWithForm>*/}
+      <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
     </Main>
     <Footer />
-    <template id="card" />
   </div>
 );
 }
