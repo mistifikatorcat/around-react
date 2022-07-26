@@ -13,85 +13,86 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   //const [isDeletePopupOpen, setIsDeletePopupOpen] = React.useState(false);
-  const [selectedCard, setSelectedCard] = React.useState({visibility: false});
+  const [selectedCard, setSelectedCard] = React.useState({ visibility: false });
 
-  function handleEditAvatarClick(){
+  function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
   }
-  
-  function handleEditProfileClick(){
+
+  function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
   }
-  
-  function handleAddPlaceClick(){
+
+  function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(true);
   }
 
-  function handleImageClick(card){
+  function handleImageClick(card) {
     setSelectedCard({
       ...selectedCard,
       visibility: true,
-      name: card.name, 
-      link: card.link});
+      name: card.name,
+      link: card.link
+    });
   }
-  
+
   /*function handleImageDelete(){
     setIsDeletePopupOpen(true);
     
   }*/
 
-  function closeAllPopups(){
+  function closeAllPopups() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
-    setSelectedCard({visibility: false});
+    setSelectedCard({ visibility: false });
     //setIsDeletePopupOpen(false);
   }
-  return(
-  <div>
-    <Header />
-    <Main
-    onEditAvatarClick={handleEditAvatarClick}
-    onEditProfileClick={handleEditProfileClick}
-    onAddPlaceClick={handleAddPlaceClick}
-    onCardClick={handleImageClick}
-    >
-      <PopupWithForm
-      name="avatar"
-      title="Change Avatar"
-      isOpen={isEditAvatarPopupOpen}
-      onClose={closeAllPopups}
+  return (
+    <div>
+      <Header />
+      <Main
+        onEditAvatarClick={handleEditAvatarClick}
+        onEditProfileClick={handleEditProfileClick}
+        onAddPlaceClick={handleAddPlaceClick}
+        onCardClick={handleImageClick}
       >
-        <fieldset className="form__fieldset">
-          <input className="form__input" type="url" id="avatarInput" placeholder="Image Link" required />
-          <span className="form__input-error avatarInput-error" />
-        </fieldset>
-      </PopupWithForm>
-      <PopupWithForm
-      name="edit"
-      title="Edit Profile"
-      isOpen={isEditProfilePopupOpen}
-      onClose={closeAllPopups}>
-        <fieldset className="form__fieldset">
-          <input className="form__input" type="text" id="name" placeholder="Name" required  minLength="2" maxLength="40"/>
-          <span className="form__input-error name-error"></span>
-          <input className="form__input" type="text" id="category" placeholder="About me" required minLength="2" maxLength="200"/>
-          <span className="form__input-error category-error"></span>
-        </fieldset>
-      </PopupWithForm>
-      <PopupWithForm
-      name="add"
-      title="New Place"
-      isOpen={isAddPlacePopupOpen}
-      onClose={closeAllPopups}>
-        <fieldset className="form__fieldset">
-          <input className="form__input" type="text" id="title" placeholder="Title" required minLength="1" maxLength="30" />
-          <span className="form__input-error title-error"></span>
-          <input className="form__input" type="url" id="link" placeholder="Image Link" required />
-          <span className="form__input-error link-error"></span>
-        </fieldset>
-      </PopupWithForm>
-     {/* <PopupWithForm
+        <PopupWithForm
+          name="avatar"
+          title="Change Avatar"
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+        >
+          <fieldset className="form__fieldset">
+            <input className="form__input" type="url" id="avatarInput" placeholder="Image Link" required />
+            <span className="form__input-error avatarInput-error" />
+          </fieldset>
+        </PopupWithForm>
+        <PopupWithForm
+          name="edit"
+          title="Edit Profile"
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}>
+          <fieldset className="form__fieldset">
+            <input className="form__input" type="text" id="name" placeholder="Name" required minLength="2" maxLength="40" />
+            <span className="form__input-error name-error"></span>
+            <input className="form__input" type="text" id="category" placeholder="About me" required minLength="2" maxLength="200" />
+            <span className="form__input-error category-error"></span>
+          </fieldset>
+        </PopupWithForm>
+        <PopupWithForm
+          name="add"
+          title="New Place"
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}>
+          <fieldset className="form__fieldset">
+            <input className="form__input" type="text" id="title" placeholder="Title" required minLength="1" maxLength="30" />
+            <span className="form__input-error title-error"></span>
+            <input className="form__input" type="url" id="link" placeholder="Image Link" required />
+            <span className="form__input-error link-error"></span>
+          </fieldset>
+        </PopupWithForm>
+        {/* <PopupWithForm
       name="delete"
       title="Are you sure?"
       isOpen={isDeletePopupOpen}
@@ -100,11 +101,11 @@ function App() {
           <button className="form__button" type="submit" id="submitButton">Yes</button>
         </fieldset>
   </PopupWithForm>*/}
-      <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
-    </Main>
-    <Footer />
-  </div>
-);
+        <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+      </Main>
+      <Footer />
+    </div>
+  );
 }
 
 export default App;
