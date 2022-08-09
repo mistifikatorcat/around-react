@@ -16,7 +16,7 @@ export class Api {
         })
     }
 
-    /* editProfile(data){
+     setUserInfo(data){
          return this._fetch(`${this._baseUrl}/users/me`, {
              method: "PATCH",
              headers: this._headers,
@@ -27,6 +27,7 @@ export class Api {
          });
  
      }
+     
      editProfilePic(data){
          return this._fetch(`${this._baseUrl}/users/me/avatar`, {
              method: "PATCH",
@@ -35,14 +36,14 @@ export class Api {
                  avatar: data.avatar
              })
          });
-     } */
+     } 
 
     getInitialCards() {
         return this._fetch(`${this._baseUrl}/cards`, {
             headers: this._headers
         })
     }
-    /* createCard(data){
+     createCard(data){
          return this._fetch(`${this._baseUrl}/cards`, {
              method: "POST",
              headers: this._headers,
@@ -52,19 +53,21 @@ export class Api {
              })
          });
      }
-     likeCard(id) {
+     changeLikeCardStatus(id, liked) {
+        if (!liked){
          return this._fetch(`${this._baseUrl}/cards/likes/${id}`, {
            method: "PUT",
            headers: this._headers,
          });
        }
      
-     unlikeCard(id) {
+     else {
          return this._fetch(`${this._baseUrl}/cards/likes/${id}`, {
            method: "DELETE",
            headers: this._headers,
          });
        }
+    }
      
      deleteCard(id) {
          return this._fetch(`${this._baseUrl}/cards/${id}`, {
@@ -72,7 +75,7 @@ export class Api {
              headers: this._headers,
            });
  
-     }*/
+     }
 
 
 

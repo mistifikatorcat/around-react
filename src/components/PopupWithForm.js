@@ -15,9 +15,9 @@ export default function PopupWithForm(props) {
             {props.children}
             <fieldset className="form__fieldset">
               <button
-                className="form__button form__button_inactive"
+                className="form__button"
                 type="submit"
-                disabled>Save</button>
+                >Save</button>
             </fieldset>
           </form>
         </div>
