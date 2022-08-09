@@ -35,7 +35,11 @@ export default function Card(props) {
   return (
     <li className="grid__card">
       <div className="card">
-        <div className="card__image" style={{ backgroundImage: `url(${props.card.link})` }} onClick={handleImageClick} />
+        <div className="card__image"
+         style={{
+          backgroundImage: `url(${props.card.link})`
+          }}
+          onClick={handleImageClick} />
         <button type="button" className={cardDeleteButtonClassName} onClick={handleDeleteClick} />
         <div className="card__info">
           <h3 className="card__title">{name}</h3>

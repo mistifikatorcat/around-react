@@ -1,44 +1,52 @@
-
-import React from 'react';
-import '../index.css';
-import Header from './Header';
-import Main from './Main';
+import React from "react";
+import "../index.css";
+import Header from "./Header";
+import Main from "./Main";
 import api from "../utils/api";
-import EditProfilePopup from './EditProfilePopup';
-import Footer from './Footer';
-import AddPlacePopup from './AddPlacePopup';
-import ImagePopup from './ImagePopup';
-import { CurrentUserContext } from '../contexts/CurrentUserContext';
-import EditAvatarPopup from './EditAvatarPopup';
-
+import EditProfilePopup from "./EditProfilePopup";
+import Footer from "./Footer";
+import AddPlacePopup from "./AddPlacePopup";
+import ImagePopup from "./ImagePopup";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import EditAvatarPopup from "./EditAvatarPopup";
 
 function App() {
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
+    React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
+    React.useState(false);
   //const [isDeletePopupOpen, setIsDeletePopupOpen] = React.useState(false);
-  const [selectedCard, setSelectedCard] = React.useState({ visibility: false });
+  const [selectedCard, setSelectedCard] = React.useState({
+    visibility: false
+  });
   const [currentUser, setCurrentUser] = React.useState(false);
   const [cards, setCards] = React.useState([]);
 
   //getting info from the server
 
   React.useEffect(() => {
-    api.getUserInfo()
+    api
+      .getUserInfo()
       .then((data) => {
         setCurrentUser({
           name: data.name,
           about: data.about,
-          avatar: data.avatar
+          avatar: data.avatar,
         });
       })
-      .catch((err) => { console.log(err); });
+      .catch((err) => {
+        console.log(err);
+      });
 
-    api.getInitialCards()
+    api
+      .getInitialCards()
       .then((items) => {
         setCards(items);
       })
-      .catch((err) => { console.log(err) });
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   //event handlers
@@ -60,7 +68,7 @@ function App() {
       ...selectedCard,
       visibility: true,
       name: card.name,
-      link: card.link
+      link: card.link,
     });
   }
 
@@ -73,7 +81,9 @@ function App() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
-    setSelectedCard({ visibility: false });
+    setSelectedCard({
+      visibility: false
+    });
     //setIsDeletePopupOpen(false);
   }
 
@@ -81,34 +91,40 @@ function App() {
 
   function handleCardLike(card) {
     // Check one more time if this card was already liked
-    const isLiked = card.likes.some(user => user._id === currentUser._id);
+    const isLiked = card.likes.some((user) => user._id === currentUser._id);
 
     // Send a request to the API and getting the updated card data
     api.likeCard(card._id, !isLiked).then((newCard) => {
-      setCards((state) => state.map((currentCard) => currentCard._id === card._id ? newCard : currentCard));
+      setCards((state) =>
+        state.map((currentCard) =>
+          currentCard._id === card._id ? newCard : currentCard
+        )
+      );
     });
-
   }
 
   //delete card handler
 
   function handleCardDelete(card) {
-    api.deleteCard(card._id)
+    api
+      .deleteCard(card._id)
       .then(() => {
         const updatedCards = cards.filter((currentCard) => {
           return currentCard._id !== card._id;
-
         });
         setCards(updatedCards);
         closeAllPopups();
       })
-      .catch((err) => { console.log(err) });
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   //updating user info
 
   function handleUpdateUser(data) {
-    api.setUserInfo(data)
+    api
+      .setUserInfo(data)
       .then((updatedData) => {
         setCurrentUser({
           ...currentUser,
@@ -117,32 +133,40 @@ function App() {
         });
         closeAllPopups();
       })
-      .catch((err) => { console.log(err) });
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   //updating profile pic
 
   function handleUpdateAvatar(data) {
-    api.editProfilePic(data)
+    api
+      .editProfilePic(data)
       .then((updatedData) => {
         setCurrentUser({
           ...currentUser,
-          avatar: updatedData.avatar
+          avatar: updatedData.avatar,
         });
         closeAllPopups();
       })
-      .catch((err) => { console.log(err) });
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   //uploading a new card
 
   function handleAddPlaceSubmit(data) {
-    api.createCard(data)
+    api
+      .createCard(data)
       .then((newCard) => {
         setCards([newCard, ...cards]);
         closeAllPopups();
       })
-      .catch((err) => { console.log(err) });
+      .catch((err) => {
+        console.log(err);
+      });
   }
   return (
     <div>
@@ -163,16 +187,19 @@ function App() {
             isOpen={isEditAvatarPopupOpen}
             onClose={closeAllPopups}
             onUpdateAvatar={handleUpdateAvatar}
-          ></EditAvatarPopup>
+          />
+
           <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
             onClose={closeAllPopups}
-            onUpdateUser={handleUpdateUser} />
+            onUpdateUser={handleUpdateUser}
+          />
+
           <AddPlacePopup
             isOpen={isAddPlacePopupOpen}
             onClose={closeAllPopups}
             onAddPlaceSubmit={handleAddPlaceSubmit}
-          ></AddPlacePopup>
+          />
           {/* <PopupWithForm
       name="delete"
       title="Are you sure?"

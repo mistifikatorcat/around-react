@@ -22,7 +22,9 @@ export default function AddPlacePopup(props) {
     function handleSubmit(e) {
         e.preventDefault();
 
-        props.onAddPlaceSubmit({ title: title, link: link });
+        props.onAddPlaceSubmit({
+            title: title, link: link
+        });
     }
 
     return (
