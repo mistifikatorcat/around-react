@@ -162,7 +162,7 @@ function App() {
         /*form parameters*/
         isOpen={isEditAvatarPopupOpen} 
         onClose={closeAllPopups}
-        onUpdateUser={handleUpdateAvatar}
+        onUpdateAvatar={handleUpdateAvatar}
         ></EditAvatarPopup>
         <EditProfilePopup 
           isOpen={isEditProfilePopupOpen} 

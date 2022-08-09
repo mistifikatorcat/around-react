@@ -11,7 +11,7 @@ export default function PopupWithForm(props) {
         </button>
         <div className={`${props.name}__form`}>
           <h3 className={`${props.name}__title`}>{props.title}</h3>
-          <form className="form popup__form" id={`${props.name}Form`} >
+          <form className="form popup__form" id={`${props.name}Form`} onSubmit={props.onSubmit} >
             {props.children}
             <fieldset className="form__fieldset">
               <button
