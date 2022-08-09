@@ -3,7 +3,7 @@ import React from 'react';
 import '../index.css';
 import Header from './Header';
 import Main from './Main';
-import { api } from "../utils/api";
+import api from "../utils/api";
 import EditProfilePopup from './EditProfilePopup';
 import Footer from './Footer';
 import AddPlacePopup from './AddPlacePopup';
