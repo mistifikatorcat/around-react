@@ -17,7 +17,7 @@ export default function PopupWithForm(props) {
               <button
                 className="form__button"
                 type="submit"
-                >Save</button>
+              >Save</button>
             </fieldset>
           </form>
         </div>
