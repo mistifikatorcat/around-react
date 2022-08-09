@@ -2,7 +2,7 @@ export class Api {
     constructor({ baseUrl, headers }) {
         this._baseUrl = baseUrl;
         this._headers = headers;
-    };
+    }
 
     _fetch(url, header) {
         return fetch(url, header)
