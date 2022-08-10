@@ -56,14 +56,14 @@ export class Api {
     changeLikeCardStatus(id, liked) {
         if (!liked) {
             return this._fetch(`${this._baseUrl}/cards/likes/${id}`, {
-                method: "PUT",
+                method: "DELETE",
                 headers: this._headers,
             });
         }
 
         else {
             return this._fetch(`${this._baseUrl}/cards/likes/${id}`, {
-                method: "DELETE",
+                method: "PUT",
                 headers: this._headers,
             });
         }
