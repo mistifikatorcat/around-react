@@ -20,7 +20,7 @@ function App() {
   const [selectedCard, setSelectedCard] = React.useState({
     visibility: false
   });
-  const [currentUser, setCurrentUser] = React.useState('');
+  const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
 
   //getting info from the server
