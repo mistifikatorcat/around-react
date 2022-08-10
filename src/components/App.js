@@ -20,7 +20,7 @@ function App() {
   const [selectedCard, setSelectedCard] = React.useState({
     visibility: false
   });
-  const [currentUser, setCurrentUser] = React.useState(false);
+  const [currentUser, setCurrentUser] = React.useState('');
   const [cards, setCards] = React.useState([]);
 
   //getting info from the server
@@ -29,12 +29,7 @@ function App() {
     api
       .getUserInfo()
       .then((data) => {
-        setCurrentUser({
-          name: data.name,
-          about: data.about,
-          avatar: data.avatar,
-          _id: data._id
-        });
+        setCurrentUser(data);
       })
       .catch((err) => {
         console.log(err);
@@ -118,7 +113,7 @@ function App() {
           return currentCard._id !== card._id;
         });
         setCards(updatedCards);
-        closeAllPopups();
+        
       })
       .catch((err) => {
         console.log(err);
@@ -131,11 +126,7 @@ function App() {
     api
       .setUserInfo(data)
       .then((updatedData) => {
-        setCurrentUser({
-          ...currentUser,
-          name: updatedData.name,
-          about: updatedData.about,
-        });
+        setCurrentUser(updatedData);
         closeAllPopups();
       })
       .catch((err) => {
@@ -149,10 +140,7 @@ function App() {
     api
       .editProfilePic(data)
       .then((updatedData) => {
-        setCurrentUser({
-          ...currentUser,
-          avatar: updatedData.avatar,
-        });
+        setCurrentUser(updatedData);
         closeAllPopups();
       })
       .catch((err) => {
@@ -174,7 +162,6 @@ function App() {
       });
   }
   return (
-    <div>
       <CurrentUserContext.Provider value={currentUser}>
         <Header />
         <Main
@@ -218,7 +205,6 @@ function App() {
         </Main>
         <Footer />
       </CurrentUserContext.Provider>
-    </div>
   );
 }
 
