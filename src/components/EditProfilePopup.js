@@ -38,9 +38,9 @@ export default function EditProfilePopup(props) {
       onClose={props.onClose}
       onSubmit={handleSubmit}>
       <fieldset className="form__fieldset">
-        <input className="form__input" type="text" id="name" placeholder="Name" required minLength="2" maxLength="40" value={name} onChange={onNameChange} />
+        <input className="form__input" type="text" id="name" placeholder="Name" required value={name} onChange={onNameChange} />
         <span className="form__input-error name-error"></span>
-        <input className="form__input" type="text" id="category" placeholder="About me" required minLength="2" maxLength="200" value={description} onChange={onDescChange} />
+        <input className="form__input" type="text" id="category" placeholder="About me"  value={description} onChange={onDescChange} />
         <span className="form__input-error category-error"></span>
       </fieldset>
     </PopupWithForm>

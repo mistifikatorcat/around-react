@@ -33,6 +33,7 @@ function App() {
           name: data.name,
           about: data.about,
           avatar: data.avatar,
+          _id: data._id
         });
       })
       .catch((err) => {
@@ -94,12 +95,16 @@ function App() {
     const isLiked = card.likes.some((user) => user._id === currentUser._id);
 
     // Send a request to the API and getting the updated card data
-    api.likeCard(card._id, !isLiked).then((newCard) => {
+    api.changeLikeCardStatus(card._id, !isLiked)
+    .then((newCard) => {
       setCards((state) =>
         state.map((currentCard) =>
           currentCard._id === card._id ? newCard : currentCard
         )
       );
+    })
+    .catch((err) => {
+      console.log(err);
     });
   }
 
